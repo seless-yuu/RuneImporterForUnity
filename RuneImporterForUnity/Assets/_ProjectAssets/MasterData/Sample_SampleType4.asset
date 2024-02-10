@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Rune_Sample_SampleType4
-  m_EditorClassIdentifier: Assembly-CSharp:Rune:Sample_SampleType4
+  m_Script: {fileID: 11500000, guid: dcc016ad3d4a19a4eb54a1baf1b5257b, type: 3}
+  m_Name: Sample_SampleType4
+  m_EditorClassIdentifier: 
   ValueList:
   - name: FooT
   - name: BarT

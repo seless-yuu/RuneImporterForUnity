@@ -9,9 +9,9 @@ namespace RuneImporter
 {
     public static partial class RuneLoader
     {
-        public static AsyncOperationHandle Sample_SampleType2_LoadInstanceAsync()
+        public static AsyncOperationHandle Sample_SampleType3_LoadInstanceAsync()
         {
-            return Rune.Sample_SampleType2.LoadInstanceAsync();
+            return Rune.Sample_SampleType3.LoadInstanceAsync();
         }
     }
 }
@@ -19,30 +19,27 @@ namespace RuneImporter
 namespace Rune
 {
 
-public class Sample_SampleType2 : RuneScriptableObject
+public class Sample_SampleType3 : RuneScriptableObject
 {
-    public static Sample_SampleType2 instance { get; private set; }
+    public static Sample_SampleType3 instance { get; private set; }
 
     [SerializeField]
-    public Value[] ValueList = new Value[3];
+    public Value[] ValueList = new Value[2];
 
     [Serializable]
     public struct Value
     {
         public string name;
-        public Vector3 position3;
-        public Vector4 position4;
-        public Vector2 position2;
     }
 
     public static AsyncOperationHandle LoadInstanceAsync() {
         Assert.IsFalse(string.IsNullOrEmpty(Config.ScriptableObjectDirectory), "Config.ScriptableObjectDirectoryにAddressableディレクトリパスを設定してください");
         
         var out_dir = Config.ScriptableObjectDirectory;
-        var asset_name = "Rune_Sample_SampleType2.asset";
+        var asset_name = "Sample_SampleType3.asset";
         var path = out_dir + asset_name;
         var handle = Config.OnLoad(path);
-        handle.Completed += (handle) => { instance = handle.Result as Sample_SampleType2; };
+        handle.Completed += (handle) => { instance = handle.Result as Sample_SampleType3; };
 
         return handle;
     }

@@ -13,6 +13,8 @@ namespace RuneImporter
         // @note 未設定の場合runeファイルと同じディレクトリに出力します
         public const string ScriptableObjectDirectory = "Assets/_ProjectAssets/MasterData/";
 
+        public const string RuneDirectory = "Assets/_ProjectAssets/MasterData/";
+
         // ScriptableObjectのクラスが属するアセンブリ名
         public const string AssemblyName = "Assembly-CSharp";
 

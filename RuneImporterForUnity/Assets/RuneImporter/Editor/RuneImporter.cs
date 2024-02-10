@@ -11,8 +11,7 @@ using UnityEditor.AssetImporters;
 
 namespace RuneImporter
 {
-    [ScriptedImporter(1, "rune")]
-    public class RuneImporter : ScriptedImporter
+    public class RuneImporter
     {
         // インポーターのバージョン
         // Tool側と一致していないとバージョンが違うということになる
@@ -78,8 +77,22 @@ namespace RuneImporter
         const string ClassPrefix = "Rune.";
         const string ValueListName = "ValueList";
 
-        public override void OnImportAsset(AssetImportContext ctx)
+        [MenuItem("Tools/RuneImporter/Import Runes")]
+        public static void ImportRunes()
         {
+            var files = Directory.EnumerateFiles(Config.RuneDirectory, "*.rune", SearchOption.TopDirectoryOnly);
+            foreach(var file_path in files)
+            {
+                using(var stream = new StreamReader(file_path))
+                {
+                    var json = stream.ReadToEnd();
+                    var data = JsonUtility.FromJson<RuneJson>(json);
+
+                    createInstanceAndSetting(data.Book, file_path);
+                    AssetDatabase.Refresh();
+                }
+            }
+            /*
             using (var stream = new StreamReader(ctx.assetPath))
             {
                 var json = stream.ReadToEnd();
@@ -88,19 +101,20 @@ namespace RuneImporter
                 createInstanceAndSetting(data.Book, ctx.assetPath);
                 AssetDatabase.Refresh();
             }
+            */
         }
 
-        void createInstanceAndSetting(RuneBook book, string src_path)
+        static void createInstanceAndSetting(RuneBook book, string src_path)
         {
             Array.ForEach(book.Sheets, (s) => createInstanceAndSetting(book, s, src_path));
         }
 
-        void createInstanceAndSetting(RuneBook book, RuneSheet sheet, string src_path)
+        static void createInstanceAndSetting(RuneBook book, RuneSheet sheet, string src_path)
         {
             Array.ForEach(sheet.Tables, (t) => createInstanceAndSetting(book, t, src_path));
         }
 
-        void createInstanceAndSetting(RuneBook book, RuneTable table, string src_path)
+        static void createInstanceAndSetting(RuneBook book, RuneTable table, string src_path)
         {
             var instance = createInstance(book, table);
             if (instance != null)
@@ -141,17 +155,17 @@ namespace RuneImporter
                 if (Config.ScriptableObjectDirectory != null)
                 {
                     Directory.CreateDirectory(Config.ScriptableObjectDirectory);
-                    AssetDatabase.CreateAsset(instance, Config.ScriptableObjectDirectory + "Rune_" + book.Name + "_" + table.Name + ".asset");
+                    AssetDatabase.CreateAsset(instance, Config.ScriptableObjectDirectory + book.Name + "_" + table.Name + ".asset");
                 }
                 else
                 {
-                    var dst_path = Path.GetDirectoryName(src_path) + "/" + "Rune_" + book.Name + "_" + table.Name + ".asset";
+                    var dst_path = Path.GetDirectoryName(src_path) + "/" + book.Name + "_" + table.Name + ".asset";
                     AssetDatabase.CreateAsset(instance, dst_path);
                 }
             }
         }
 
-        RuneScriptableObject createInstance(RuneBook book, RuneTable table)
+        static RuneScriptableObject createInstance(RuneBook book, RuneTable table)
         {
             var class_name = makeClassName(book, table);
             var type = Type.GetType(class_name);
@@ -160,12 +174,12 @@ namespace RuneImporter
             return instance;
         }
 
-        string makeClassName(RuneBook book, RuneTable table)
+        static string makeClassName(RuneBook book, RuneTable table)
         {
             return ClassPrefix + book.Name + "_" + table.Name + ", " + Config.AssemblyName;
         }
 
-        object nameToObjectValue(RuneType type, string value_name)
+        static object nameToObjectValue(RuneType type, string value_name)
         {
             switch (type.TypeName.Kind)
             {
