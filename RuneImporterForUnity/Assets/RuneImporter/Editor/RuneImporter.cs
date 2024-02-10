@@ -75,7 +75,7 @@ namespace RuneImporter
             public string Value;
         }
 
-        const string ClassPrefix = "Rune_";
+        const string ClassPrefix = "Rune.";
         const string ValueListName = "ValueList";
 
         public override void OnImportAsset(AssetImportContext ctx)
@@ -92,17 +92,17 @@ namespace RuneImporter
 
         void createInstanceAndSetting(RuneBook book, string src_path)
         {
-            Array.ForEach(book.Sheets, (s) => createInstanceAndSetting(s, src_path));
+            Array.ForEach(book.Sheets, (s) => createInstanceAndSetting(book, s, src_path));
         }
 
-        void createInstanceAndSetting(RuneSheet sheet, string src_path)
+        void createInstanceAndSetting(RuneBook book, RuneSheet sheet, string src_path)
         {
-            Array.ForEach(sheet.Tables, (t) => createInstanceAndSetting(t, src_path));
+            Array.ForEach(sheet.Tables, (t) => createInstanceAndSetting(book, t, src_path));
         }
 
-        void createInstanceAndSetting(RuneTable table, string src_path)
+        void createInstanceAndSetting(RuneBook book, RuneTable table, string src_path)
         {
-            var instance = createInstance(table);
+            var instance = createInstance(book, table);
             if (instance != null)
             {
                 var instance_type_name = instance.GetType().FullName;
@@ -141,27 +141,28 @@ namespace RuneImporter
                 if (Config.ScriptableObjectDirectory != null)
                 {
                     Directory.CreateDirectory(Config.ScriptableObjectDirectory);
-                    AssetDatabase.CreateAsset(instance, Config.ScriptableObjectDirectory + table.Name + ".asset");
+                    AssetDatabase.CreateAsset(instance, Config.ScriptableObjectDirectory + "Rune_" + book.Name + "_" + table.Name + ".asset");
                 }
                 else
                 {
-                    var dst_path = Path.GetDirectoryName(src_path) + "/" + table.Name + ".asset";
+                    var dst_path = Path.GetDirectoryName(src_path) + "/" + "Rune_" + book.Name + "_" + table.Name + ".asset";
                     AssetDatabase.CreateAsset(instance, dst_path);
                 }
             }
         }
 
-        RuneScriptableObject createInstance(RuneTable table)
+        RuneScriptableObject createInstance(RuneBook book, RuneTable table)
         {
-            var class_name = makeClassName(table);
-            var instance = ScriptableObject.CreateInstance(class_name) as RuneScriptableObject;
+            var class_name = makeClassName(book, table);
+            var type = Type.GetType(class_name);
+            var instance = ScriptableObject.CreateInstance(type) as RuneScriptableObject;
 
             return instance;
         }
 
-        string makeClassName(RuneTable table)
+        string makeClassName(RuneBook book, RuneTable table)
         {
-            return ClassPrefix + table.Name;
+            return ClassPrefix + book.Name + "_" + table.Name + ", " + Config.AssemblyName;
         }
 
         object nameToObjectValue(RuneType type, string value_name)

@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
@@ -10,7 +11,7 @@ namespace RuneImporter
         // 環境により書き換えてください
         //
         // @note 未設定の場合runeファイルと同じディレクトリに出力します
-        public const string ScriptableObjectDirectory = null;
+        public const string ScriptableObjectDirectory = "Assets/_ProjectAssets/MasterData/";
 
         // ScriptableObjectのクラスが属するアセンブリ名
         public const string AssemblyName = "Assembly-CSharp";
