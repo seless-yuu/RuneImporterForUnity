@@ -17,43 +17,23 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: e40c61291a5bf6b45bfc265e3d70281a
   m_SerializeEntries:
-  - m_GUID: d635447c2770ef14d8894271f7bd833d
-    m_Address: Assets/_ProjectAssets/MasterData/SampleType3.asset
+  - m_GUID: a72b468885532bb49a0edd551317654e
+    m_Address: Assets/_ProjectAssets/MasterData/Sample_SampleType.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6d4c9e5506b734b46a4b83efb1bc2bd1
-    m_Address: Assets/_ProjectAssets/MasterData/SampleType2.asset
+  - m_GUID: 0ef070dcf55591948aa4c461f76f610b
+    m_Address: Assets/_ProjectAssets/MasterData/Sample_SampleType2.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e43f34d99cae0b947af4035a173b96c4
-    m_Address: Assets/_ProjectAssets/MasterData/SampleType.asset
+  - m_GUID: e917801626ea7fb4bb6ba2dfe9b28323
+    m_Address: Assets/_ProjectAssets/MasterData/Sample_SampleType3.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 95553ed32b5977d438ac634a66b4f958
-    m_Address: Assets/_ProjectAssets/MasterData/SampleType4.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ccbf264f1fc0347d182de8be7cc50d59
-    m_Address: Assets/_ProjectAssets/MasterDataSampleType.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: af0a18c5435fa4383a21a3dc78cf85ef
-    m_Address: Assets/_ProjectAssets/MasterDataSampleType2.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ca742227ccbc7445890cd82e79cef080
-    m_Address: Assets/_ProjectAssets/MasterDataSampleType3.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ba06e487979ea49f6bbec407caf3afdf
-    m_Address: Assets/_ProjectAssets/MasterDataSampleType4.asset
+  - m_GUID: e02b0ceca7357e34eae87a35304c02e4
+    m_Address: Assets/_ProjectAssets/MasterData/Sample_SampleType4.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
